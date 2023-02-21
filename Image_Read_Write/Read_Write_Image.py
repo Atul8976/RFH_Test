@@ -50,6 +50,6 @@ def read_image(unprocess_images_path):
 
     return return_output
 
-read_image(unprocess_images_path)
+# read_image(unprocess_images_path)
 
 # asyncio.run(read_image(unprocess_images_path))
