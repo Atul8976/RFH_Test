@@ -90,11 +90,17 @@ final_image_path = current_directory + str('/Final_processed_images/')
 
 async def read_image(unprocess_images_path):
 
+    """async function which will convert .dicom images to .jpg image
+    and will divide the image into multiple pieces each of which 250*250 title piece"""
+
     dir_list = os.listdir(unprocess_images_path)
 
     return_output = []
 
     for i, image in enumerate(dir_list):
+        """convert each .dicom image from Unprocess_images directory to .jpg and save converted image to 
+        Intermediate_process_images"""
+
         ds = dicom.dcmread(unprocess_images_path+image)
         new_image = ds.pixel_array.astype(float)
         scaled_image = (np.maximum(new_image, 0) / new_image.max()) * 255.0
@@ -104,6 +110,8 @@ async def read_image(unprocess_images_path):
         filename = 'image_'+str(i)+'.jpg'
         final_image.save(intermediate_image_process_path+'/'+filename)
 
+        """below code will divide each image into multiple pieces inside respective folder which same name as image 
+        name"""
         name, ext = os.path.splitext(filename)
         img = Image.open(os.path.join(intermediate_image_process_path, filename))
         w, h = img.size

@@ -1,20 +1,25 @@
-# RFH_Test
+~~# RFH_Test
 
 Steps To Run Project
 
-1. Inside Project Directory Create Virtual Environment By Typing Below In terminal:
-   pip3 install virtualenv
+1. In terminal clone project from git repository using following command:
+
+   git clone https://github.com/Atul8976/RFH_Test.git
+
+2. Switch inside project directory to create virtual environment by typing below in terminal:
+   
+    pip3 install virtualenv
 
     virtualenv myenv
 
-2. Activate virtualenv :
+3. Activate virtualenv :
     
    .\myenv\Scripts\activate
 
-3. Install requirements.txt file inside project folder :
+4. Install requirements.txt file inside project folder :
   
    pip3 install -r requirements.txt
 
-4. To run the main python file type following in terminal:
+5. To run the main python file type following in terminal:
    
-   python Process_Image.py
+   python Process_Image.py~~
