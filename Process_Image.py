@@ -5,12 +5,13 @@ import numpy as np
 import asyncio
 
 async def blur_outline():
+
    """This aync function calling the read_image function from Image_Read_Write Package
    Which will convert dicom images to .jpe image for operation"""
 
    folder_path = await read_image(unprocess_images_path)
 
-   #folder path will return list of three folder name where each folder consist of respective images divided into multiple pieces
+   print("Started applying Outline and GaussianBlur on individual image titles inside folder :\n")
 
    for impath in folder_path:
       for i in os.listdir(impath):
@@ -21,6 +22,9 @@ async def blur_outline():
          im1.save(impath+"/"+i)
 
    """code for merging different pices of image together which not working currently"""
+
+   print("Finished applying Outline and GaussianBlur on individual image titles inside folder.\n")
+
    # for impath in folder_path:
    #
    #   imlist = os.listdir(impath)

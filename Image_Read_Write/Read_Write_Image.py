@@ -6,8 +6,8 @@ from itertools import product
 
 current_directory = os.getcwd()
 
-unprocess_images_path = current_directory + str("/Unprocess_images/")
-intermediate_image_process_path = current_directory + str("/Intermediate_process_images/")
+unprocess_images_path = current_directory + str("/Unprocessed_images/")
+intermediate_image_process_path = current_directory + str("/Intermediate_processed_images/")
 final_image_path = current_directory + str('/Final_processed_images/')
 
 # def blockMerge(array, imgWidth, imgHeight):
@@ -97,9 +97,14 @@ async def read_image(unprocess_images_path):
 
     return_output = []
 
+    print("Converting Images from Unprocessed_images directory into .jpg format "
+          "and started dividing individual image into multiple image titles : \n")
+
     for i, image in enumerate(dir_list):
-        """convert each .dicom image from Unprocess_images directory to .jpg and save converted image to 
-        Intermediate_process_images"""
+
+        """convert each .dicom image from Unprocessed_images directory to .jpg and save converted image to 
+        Intermediate_processed_images"""
+
 
         ds = dicom.dcmread(unprocess_images_path+image)
         new_image = ds.pixel_array.astype(float)
@@ -109,6 +114,7 @@ async def read_image(unprocess_images_path):
         final_image = Image.fromarray(scaled_image)
         filename = 'image_'+str(i)+'.jpg'
         final_image.save(intermediate_image_process_path+'/'+filename)
+
 
         """below code will divide each image into multiple pieces inside respective folder which same name as image 
         name"""
@@ -133,6 +139,9 @@ async def read_image(unprocess_images_path):
             img.crop(box).save(out)
 
         return_output.append(new_path)
+
+    print("conversion finished and save to Intermediate_processed_images directory and "
+          "finished dividing individual image into multiple image title. \n")
 
     return return_output
 
